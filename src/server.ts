@@ -16,7 +16,7 @@ server.use(cors({
 server.use(express.static(path.join(__dirname,'../public')));
 server.use(express.urlencoded({extended: true}));
 
-server.use('/api',apiRoutes);
+server.use('',apiRoutes);
 
 server.use((req: Request, res: Response) => {
     res.status(404);
