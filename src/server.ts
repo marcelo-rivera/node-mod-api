@@ -12,6 +12,7 @@ server.use(cors({
     origin:'*',
     methods: ['GET','POST']
 }));
+//server.use(cors());
 
 server.use(express.static(path.join(__dirname,'../public')));
 server.use(express.urlencoded({extended: true}));

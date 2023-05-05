@@ -80,7 +80,23 @@ export const randomPhrase = async (req:Request, res: Response) => {
 }
 
 export const uploadFile = async (req: Request, res: Response) => {
+   /* const files = req.files as { [fieldname: string]: Express.Multer.File[] }; // somente para tipo fields ou
+    //type UploadTypes = {
+    //    avatar: Express.Multer.File[],
+    //    gallery: Express.Multer.File[]
+    //}
+    //const files = req.files as UploadTypes;  // ou
+        
+    const files = req.files as {
+            avatar: Express.Multer.File[],
+            gallery: Express.Multer.File[]
+        }
+
+    console.log("avatar", files.avatar);
+    console.log("gallery", files.gallery); */
+
     console.log(req.file);
+    //console.log(req.files);
 
     res.json({});
 }
