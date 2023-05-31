@@ -1,6 +1,7 @@
+import { unlink } from 'fs/promises';
 import { Request, Response } from 'express';
 import { Sequelize } from 'sequelize';
-
+import sharp from 'sharp';
 import {Phrase } from '../models/Phrase';
 
 export const ping = (req: Request, res: Response) => {
@@ -95,8 +96,24 @@ export const uploadFile = async (req: Request, res: Response) => {
     console.log("avatar", files.avatar);
     console.log("gallery", files.gallery); */
 
-    console.log(req.file);
+    //console.log(req.file);
     //console.log(req.files);
 
-    res.json({});
+    if (req.file){
+
+        const filename = `${req.file.filename}.jpg`;
+
+        await sharp(req.file.path)
+            .resize(500)
+            .toFormat('jpeg')
+            .toFile(`./public/media/${filename}`);
+
+        await unlink(req.file.path);  //excluir arquivo temporario
+
+        res.json({ìmage: `${filename}`});
+    }else {
+        res.status(400);
+        res.json({error: 'Arquivo invalido'});
+    }
+
 }
